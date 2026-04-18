@@ -1,0 +1,93 @@
+backend:
+  name: git-gateway
+  branch: main
+
+# Where uploaded images go
+media_folder: "public/images/uploads"
+public_folder: "/images/uploads"
+
+# Site URL (for preview links)
+site_url: https://lesliebaynes.com
+display_url: https://lesliebaynes.com
+
+# Publish mode: editorial_workflow gives a draft/review/publish flow.
+# Simpler "publish directly on save" for a solo author.
+publish_mode: simple
+
+collections:
+  # ═══════════════════════════════════════════════════════════
+  # PODCAST APPEARANCES
+  # ═══════════════════════════════════════════════════════════
+  - name: "podcasts"
+    label: "Podcast Appearances"
+    label_singular: "Appearance"
+    folder: "src/content/podcasts"
+    create: true
+    slug: "{{year}}-{{month}}-{{slug}}"
+    sortable_fields: [ "date", "title" ]
+    view_filters:
+      - label: "Upcoming only"
+        field: upcoming
+        pattern: true
+      - label: "Past only"
+        field: upcoming
+        pattern: false
+    summary: "{{title}} — {{year}}-{{month}}"
+    fields:
+      - { label: "Podcast/Show Title", name: "title", widget: "string" }
+      - { label: "Host(s)", name: "host", widget: "string", required: false }
+      - { label: "Date", name: "date", widget: "datetime", date_format: "YYYY-MM-DD", time_format: false, format: "YYYY-MM-DD" }
+      - { label: "URL / Link to episode", name: "url", widget: "string", required: false, hint: "Paste the full URL. Leave blank if unavailable yet." }
+      - { label: "Topic", name: "topic", widget: "string", required: false, hint: "What was discussed. Example: Between Interpretation and Imagination" }
+      - label: "Category"
+        name: "category"
+        widget: "select"
+        options: [ "book", "academic", "general" ]
+        default: "book"
+      - { label: "Upcoming (not yet released)?", name: "upcoming", widget: "boolean", default: false, hint: "Check if this is forthcoming and hasn't been published yet." }
+      - { label: "Feature on homepage?", name: "featured", widget: "boolean", default: false, required: false }
+      - { label: "Notes (internal)", name: "body", widget: "markdown", required: false, hint: "Optional internal notes or a brief description." }
+
+  # ═══════════════════════════════════════════════════════════
+  # BOOK ENDORSEMENTS
+  # ═══════════════════════════════════════════════════════════
+  - name: "endorsements"
+    label: "Book Endorsements"
+    label_singular: "Endorsement"
+    folder: "src/content/endorsements"
+    create: true
+    slug: "{{order}}-{{slug}}"
+    sortable_fields: [ "order" ]
+    summary: "{{order}}. {{author}}"
+    fields:
+      - { label: "Author of the endorsement", name: "author", widget: "string", hint: "The person quoted, e.g. Michael Ward" }
+      - { label: "Affiliation", name: "affiliation", widget: "string", required: false, hint: "e.g. University of Oxford" }
+      - { label: "Their book title (optional)", name: "bookTitle", widget: "string", required: false, hint: "If the endorser is being identified as 'author of X', put X here." }
+      - label: "Tier"
+        name: "tier"
+        widget: "select"
+        options: [ "lead", "featured", "supporting", "review" ]
+        default: "supporting"
+        hint: "Lead = biggest display (1 per book). Featured = top row of 3. Supporting = smaller grid. Review = press reviews section."
+      - { label: "Display order", name: "order", widget: "number", default: 100, value_type: "int", min: 1, hint: "Lower number shows first" }
+      - { label: "Endorsement text", name: "body", widget: "text", hint: "The quote itself. Do not include quotation marks — they're added automatically." }
+
+  # ═══════════════════════════════════════════════════════════
+  # WRITING (essays, articles, short pieces)
+  # ═══════════════════════════════════════════════════════════
+  - name: "writing"
+    label: "Writing"
+    label_singular: "Article"
+    folder: "src/content/writing"
+    create: true
+    slug: "{{year}}-{{slug}}"
+    sortable_fields: [ "date", "title" ]
+    summary: "{{title}} — {{year}}"
+    fields:
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Publication", name: "publication", widget: "string", hint: "e.g. The Wall Street Journal, Eighth Day Institute" }
+      - { label: "Date published", name: "date", widget: "datetime", date_format: "YYYY-MM-DD", time_format: false, format: "YYYY-MM-DD" }
+      - { label: "URL", name: "url", widget: "string", required: false }
+      - { label: "Summary", name: "summary", widget: "text", required: false, hint: "1–2 sentences describing the piece." }
+      - { label: "Display order", name: "order", widget: "number", default: 100, value_type: "int", required: false }
+      - { label: "Body (optional)", name: "body", widget: "markdown", required: false, hint: "Only used if you want to include the full text. Usually left empty." }

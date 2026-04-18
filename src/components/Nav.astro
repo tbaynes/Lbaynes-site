@@ -1,0 +1,95 @@
+---
+interface Props {
+  active?: 'home' | 'book' | 'about' | 'media' | 'writing' | 'contact';
+}
+
+const { active = 'home' } = Astro.props;
+
+const links = [
+  { href: '/book',    label: 'The Book',        key: 'book' },
+  { href: '/about',   label: 'About',           key: 'about' },
+  { href: '/media',   label: 'Media & Speaking', key: 'media' },
+  { href: '/writing', label: 'Writing',         key: 'writing' },
+  { href: '/contact', label: 'Contact',         key: 'contact' },
+];
+---
+
+<nav>
+  <a href="/" class="wordmark">Leslie Baynes</a>
+  <ul class="nav-links">
+    {links.map(link => (
+      <li>
+        <a href={link.href} class={active === link.key ? 'active' : ''}>
+          {link.label}
+        </a>
+      </li>
+    ))}
+  </ul>
+</nav>
+
+<style>
+  nav {
+    padding: 28px 48px;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    border-bottom: 1px solid var(--rule);
+    max-width: var(--max-width);
+    margin: 0 auto;
+  }
+
+  .wordmark {
+    font-family: var(--font-display);
+    font-size: 22px;
+    font-weight: 400;
+    font-variation-settings: "opsz" 144, "SOFT" 30;
+    letter-spacing: 0.02em;
+    color: var(--ink);
+    text-decoration: none;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 36px;
+    list-style: none;
+  }
+
+  .nav-links a {
+    color: var(--ink-soft);
+    text-decoration: none;
+    font-family: var(--font-body);
+    font-size: 15px;
+    letter-spacing: 0.04em;
+    transition: color 0.2s ease;
+    position: relative;
+  }
+
+  .nav-links a:hover { color: var(--oxblood); }
+
+  .nav-links a.active {
+    color: var(--ink);
+  }
+
+  .nav-links a.active::after {
+    content: '';
+    position: absolute;
+    bottom: -6px;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: var(--oxblood);
+  }
+
+  @media (max-width: 720px) {
+    nav {
+      padding: 20px 24px;
+      flex-direction: column;
+      gap: 16px;
+      align-items: flex-start;
+    }
+    .nav-links {
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+  }
+</style>

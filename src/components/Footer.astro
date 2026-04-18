@@ -1,0 +1,48 @@
+---
+const year = new Date().getFullYear();
+---
+
+<footer>
+  <div>&copy; {year} Leslie Baynes &middot; Springfield, Missouri</div>
+  <div class="links">
+    <a href="/contact">Contact</a>
+    <a href="/media">Press</a>
+    <a href="/media">Speaking</a>
+  </div>
+</footer>
+
+<style>
+  footer {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 48px;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    border-top: 1px solid var(--rule);
+    font-family: var(--font-body);
+    font-size: 14px;
+    color: var(--ink-muted);
+  }
+
+  .links a {
+    color: var(--ink-muted);
+    text-decoration: none;
+    margin-left: 24px;
+  }
+
+  .links a:hover { color: var(--oxblood); }
+
+  @media (max-width: 720px) {
+    footer {
+      flex-direction: column;
+      gap: 12px;
+      padding: 32px 24px;
+      align-items: flex-start;
+    }
+    .links a {
+      margin-left: 0;
+      margin-right: 20px;
+    }
+  }
+</style>

@@ -1,0 +1,185 @@
+/* ============================================================
+   LESLIEBAYNES.COM — DESIGN SYSTEM
+   ============================================================ */
+
+:root {
+  /* —— Color ———————————————————————————————— */
+  --ivory: #f7f2e8;
+  --ivory-deep: #efe8d8;
+  --cream: #faf6ee;
+  --ink: #231c15;
+  --ink-soft: #4a3f33;
+  --ink-muted: #7a6d5e;
+  --rule: #d8cdb5;
+  --oxblood: #6b2824;
+  --oxblood-deep: #4e1c19;
+  --sepia: #8b6b48;
+
+  /* —— Type ————————————————————————————————— */
+  --font-display: 'Fraunces', Georgia, serif;
+  --font-body: 'Source Serif 4', Georgia, serif;
+
+  /* —— Spacing / layout ———————————————————— */
+  --max-width: 1400px;
+  --gutter: 48px;
+  --gutter-mobile: 24px;
+}
+
+/* ——————————————————————————————————————————————
+   Reset / base
+   —————————————————————————————————————————————— */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--ivory);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 18px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  background-image:
+    radial-gradient(ellipse 120% 80% at 50% 0%, rgba(255, 250, 240, 0.6) 0%, transparent 60%),
+    radial-gradient(ellipse 100% 60% at 0% 100%, rgba(139, 107, 72, 0.04) 0%, transparent 50%);
+  background-attachment: fixed;
+}
+
+/* Paper-grain texture overlay */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.4;
+  z-index: 1;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.14 0 0 0 0 0.12 0 0 0 0 0.08 0 0 0 0 0.08 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+main, nav, footer { position: relative; z-index: 2; }
+
+img { max-width: 100%; height: auto; display: block; }
+
+/* ——————————————————————————————————————————————
+   Typography utilities
+   —————————————————————————————————————————————— */
+.display {
+  font-family: var(--font-display);
+  font-variation-settings: "opsz" 144, "SOFT" 30;
+}
+
+.serif-body { font-family: var(--font-body); }
+
+.eyebrow {
+  font-family: var(--font-body);
+  font-size: 13px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--oxblood);
+}
+
+.section-label {
+  font-family: var(--font-body);
+  font-size: 12px;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--sepia);
+}
+
+/* ——————————————————————————————————————————————
+   Buttons
+   —————————————————————————————————————————————— */
+.btn {
+  display: inline-block;
+  padding: 14px 28px;
+  font-family: var(--font-body);
+  font-size: 14px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border: 1px solid var(--ink);
+  color: var(--ink);
+  background: transparent;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.btn:hover {
+  background: var(--ink);
+  color: var(--ivory);
+}
+
+.btn.primary {
+  background: var(--oxblood);
+  color: var(--ivory);
+  border-color: var(--oxblood);
+}
+
+.btn.primary:hover {
+  background: var(--oxblood-deep);
+  border-color: var(--oxblood-deep);
+}
+
+/* ——————————————————————————————————————————————
+   Section dividers
+   —————————————————————————————————————————————— */
+.section-divider {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 var(--gutter);
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.section-divider::before,
+.section-divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--rule);
+}
+
+.section-divider .ornament {
+  font-family: var(--font-display);
+  font-size: 18px;
+  color: var(--sepia);
+  letter-spacing: 0.4em;
+}
+
+/* ——————————————————————————————————————————————
+   Entrance animations
+   —————————————————————————————————————————————— */
+@keyframes rise {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes riseFade {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+.animate-rise {
+  opacity: 0;
+  animation: rise 0.9s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+}
+
+.animate-fade {
+  opacity: 0;
+  animation: riseFade 1.2s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+}
+
+/* ——————————————————————————————————————————————
+   Responsive gutters
+   —————————————————————————————————————————————— */
+@media (max-width: 720px) {
+  :root {
+    --gutter: var(--gutter-mobile);
+  }
+}

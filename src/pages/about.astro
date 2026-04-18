@@ -1,0 +1,248 @@
+---
+import Base from '../layouts/Base.astro';
+---
+
+<Base
+  title="About — Leslie Baynes"
+  description="Biography, research, and teaching of Leslie Baynes, Professor of Religious Studies at Missouri State University."
+  activePage="about"
+>
+
+  <section class="about-hero">
+    <div class="about-text">
+      <div class="section-label">About</div>
+      <h1>About Leslie Baynes</h1>
+      <p class="lede">
+        Leslie Baynes is a scholar of the New Testament and Second Temple Judaism whose work ranges
+        from the apocalyptic literature of the ancient world to the Christian imagination of the
+        twentieth century. She is Professor of Religious Studies at Missouri State University,
+        where she has taught since 2005.
+      </p>
+      <p>
+        Her most recent book, <em>Between Interpretation and Imagination: C. S. Lewis and the
+        Bible</em> (Eerdmans, 2025), is the first full-length study of how Lewis read Scripture
+        &mdash; drawing on previously unpublished marginalia from his personal library. Michael
+        Ward of Oxford has called it &ldquo;easily the best book yet written on Lewis and
+        Scripture.&rdquo;
+      </p>
+      <p>
+        Her first book, <em>The Heavenly Book Motif in Judeo-Christian Apocalypses 200
+        BCE&ndash;200 CE</em> (Brill, 2012), established her work in the field of ancient
+        apocalyptic literature, where she continues to write on 1 Enoch, the Book of Revelation,
+        and the reception history of biblical texts.
+      </p>
+      <p>
+        Leslie served as a translator for the New American Bible Revised Edition &mdash; the
+        English translation used in Catholic liturgy across the United States. She contributed to
+        the New Testament&rsquo;s Johannine books: the Gospel, Epistles, and Revelation of John.
+        The translation was approved for liturgical use by the Dicastery for Divine Worship in
+        June 2025.
+      </p>
+    </div>
+
+    <div class="about-image">
+      <img src="/images/headshot-hero.jpg" alt="Portrait of Leslie Baynes" loading="eager" />
+    </div>
+  </section>
+
+  <div class="section-divider">
+    <span class="ornament">&#9753;</span>
+  </div>
+
+  <section class="origin">
+    <h2>A biblical scholar, in short</h2>
+    <p>
+      Leslie&rsquo;s scholarly life began in an unlikely place. She didn&rsquo;t own a Bible until
+      she was fourteen. As a college student at the University of Dayton, she chose English for her
+      major because her parents considered religious studies impractical &mdash; though she minored
+      in it anyway, and read classical Greek on the side because she loved the language.
+    </p>
+    <p>
+      She earned her Ph.D. in Christianity and Judaism in Antiquity at the University of Notre Dame
+      in 2005, taught at Notre Dame briefly, and joined the faculty at Missouri State the same
+      year. She has been there ever since.
+    </p>
+    <p>
+      In 2014 she was named Scholar-in-Residence at The Kilns &mdash; C. S. Lewis&rsquo;s home
+      outside Oxford &mdash; a residency that seeded the book that would become <em>Between
+      Interpretation and Imagination</em> a decade later. In 2023 she was selected for the
+      inaugural cohort of Inklings Project Fellows at the University of Notre Dame&rsquo;s McGrath
+      Institute for Church Life. She was promoted to Professor of Religious Studies in 2026.
+    </p>
+  </section>
+
+  <section class="service">
+    <h2>Research and professional service</h2>
+    <p>
+      Her ongoing research sits at the intersection of several fields: Second Temple Judaism,
+      apocalyptic literature, the Book of Revelation, 1 Enoch, reception history, and C. S. Lewis.
+      Her current projects include a chapter for <em>The Fourth Gospel and Revelation as Johannine
+      Literature</em> (Bloomsbury T&amp;T Clark) and the introduction and annotations to the Book
+      of Revelation for <em>The Ancient Christian Study Bible</em>, forthcoming from Oxford
+      University Press.
+    </p>
+    <p>
+      She serves on the advisory board of <em>St. Vladimir&rsquo;s Theological Quarterly</em> and
+      the editorial board of <em>Texts and Studies in the Ethiopic Bible and Related Literature</em>.
+      She is co-chair of the Biblical Exegesis from Eastern Orthodox Perspectives section at the
+      Society of Biblical Literature.
+    </p>
+  </section>
+
+  <section class="teaching">
+    <h2>Courses taught</h2>
+    <p>
+      At Missouri State, Leslie teaches New Testament, Jesus of Nazareth, Apocalypses, C. S. Lewis,
+      and Catholicism, along with graduate seminars on biblical interpretation, the Book of
+      Revelation and its afterlives, and Genesis 1&ndash;3. She has led two study-away courses:
+      <em>Pagans and Christians</em> in Italy and <em>Jack and Joy in Oxford: C. S. Lewis at
+      Home</em> in England.
+    </p>
+  </section>
+
+  <section class="cv-cta">
+    <div class="cv-cta-inner">
+      <div>
+        <h3>Full publication list and academic history</h3>
+        <p>Complete CV available as a downloadable PDF.</p>
+      </div>
+      <a href="/cv-leslie-baynes.pdf" class="btn">Download CV</a>
+    </div>
+  </section>
+
+</Base>
+
+<style>
+  .about-hero {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 80px 48px 100px;
+    display: grid;
+    grid-template-columns: 1.4fr 1fr;
+    gap: 80px;
+    align-items: start;
+  }
+
+  @media (max-width: 900px) {
+    .about-hero {
+      grid-template-columns: 1fr;
+      padding: 48px 24px 60px;
+      gap: 48px;
+    }
+  }
+
+  .about-text h1 {
+    font-family: var(--font-display);
+    font-size: clamp(44px, 5.5vw, 72px);
+    font-weight: 400;
+    font-variation-settings: "opsz" 144, "SOFT" 40, "WONK" 1;
+    line-height: 1.05;
+    letter-spacing: -0.015em;
+    color: var(--ink);
+    margin-top: 24px;
+    margin-bottom: 36px;
+  }
+
+  .about-text .lede {
+    font-family: var(--font-display);
+    font-size: clamp(20px, 2vw, 24px);
+    font-weight: 300;
+    font-variation-settings: "opsz" 60;
+    line-height: 1.45;
+    color: var(--ink-soft);
+    margin-bottom: 28px;
+  }
+
+  .about-text p {
+    font-family: var(--font-body);
+    font-size: 17px;
+    line-height: 1.7;
+    color: var(--ink-soft);
+    margin-bottom: 20px;
+  }
+
+  .about-image {
+    aspect-ratio: 4/5;
+    overflow: hidden;
+    border-radius: 2px;
+    box-shadow:
+      0 20px 40px rgba(35, 28, 21, 0.12),
+      0 40px 80px rgba(35, 28, 21, 0.08);
+    position: sticky;
+    top: 40px;
+  }
+
+  .about-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 18%;
+  }
+
+  @media (max-width: 900px) {
+    .about-image { position: static; }
+  }
+
+  .origin, .service, .teaching {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 80px 48px;
+  }
+
+  @media (max-width: 900px) {
+    .origin, .service, .teaching { padding: 60px 24px; }
+  }
+
+  .origin h2, .service h2, .teaching h2 {
+    font-family: var(--font-display);
+    font-size: clamp(30px, 3.4vw, 40px);
+    font-weight: 400;
+    font-variation-settings: "opsz" 144, "SOFT" 30;
+    color: var(--ink);
+    margin-bottom: 36px;
+    letter-spacing: -0.005em;
+  }
+
+  .origin p, .service p, .teaching p {
+    font-family: var(--font-body);
+    font-size: 18px;
+    line-height: 1.75;
+    color: var(--ink-soft);
+    margin-bottom: 24px;
+  }
+
+  .cv-cta {
+    background: var(--ivory-deep);
+    padding: 80px 48px;
+    margin-top: 40px;
+  }
+
+  @media (max-width: 900px) {
+    .cv-cta { padding: 60px 24px; }
+  }
+
+  .cv-cta-inner {
+    max-width: 900px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 32px;
+    flex-wrap: wrap;
+  }
+
+  .cv-cta h3 {
+    font-family: var(--font-display);
+    font-size: 26px;
+    font-weight: 400;
+    font-variation-settings: "opsz" 144;
+    color: var(--ink);
+    margin-bottom: 8px;
+  }
+
+  .cv-cta p {
+    font-family: var(--font-body);
+    color: var(--ink-muted);
+    font-size: 16px;
+  }
+</style>

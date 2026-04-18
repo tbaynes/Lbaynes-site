@@ -1,0 +1,16 @@
+{
+  "name": "lbaynes-site",
+  "type": "module",
+  "version": "0.1.0",
+  "description": "Personal website for Leslie Baynes — biblical scholar and author",
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "astro": "^4.16.0"
+  }
+}

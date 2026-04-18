@@ -1,0 +1,201 @@
+---
+import Base from '../layouts/Base.astro';
+---
+
+<Base
+  title="Contact — Leslie Baynes"
+  description="Contact Leslie Baynes for media inquiries, speaking invitations, and academic correspondence."
+  activePage="contact"
+>
+
+  <section class="contact-hero">
+    <div class="section-label">Contact</div>
+    <h1>Get in touch</h1>
+    <p class="lede">
+      Please use the appropriate address below so your message reaches Leslie directly and gets a
+      timely response.
+    </p>
+  </section>
+
+  <section class="contact-options">
+    <div class="contact-card">
+      <div class="contact-icon">M</div>
+      <h3>Media &amp; Press</h3>
+      <p>Podcast bookings, interviews, press inquiries, and permissions.</p>
+      <a href="mailto:media@lesliebaynes.com" class="contact-email">media@lesliebaynes.com</a>
+      <p class="response-time">Response within 3&ndash;5 business days</p>
+    </div>
+
+    <div class="contact-card">
+      <div class="contact-icon">S</div>
+      <h3>Speaking &amp; Events</h3>
+      <p>Keynotes, academic panels, book clubs, webinars, and conference invitations.</p>
+      <a href="mailto:speaking@lesliebaynes.com" class="contact-email">speaking@lesliebaynes.com</a>
+      <p class="response-time">Response within 3&ndash;5 business days</p>
+    </div>
+
+    <div class="contact-card">
+      <div class="contact-icon">A</div>
+      <h3>Academic &amp; General</h3>
+      <p>Scholarly correspondence, student inquiries, and general messages.</p>
+      <a href="mailto:hello@lesliebaynes.com" class="contact-email">hello@lesliebaynes.com</a>
+      <p class="response-time">Response within 1 week</p>
+    </div>
+  </section>
+
+  <section class="affiliation">
+    <h3>Institutional affiliation</h3>
+    <p>
+      Leslie Baynes<br />
+      Professor of Religious Studies<br />
+      Department of Languages, Cultures, and Religions<br />
+      Missouri State University<br />
+      901 S. National Ave.<br />
+      Springfield, MO 65897
+    </p>
+    <p class="mu-email">
+      <a href="mailto:lbaynes@missouristate.edu">lbaynes@missouristate.edu</a>
+    </p>
+  </section>
+
+</Base>
+
+<style>
+  .contact-hero {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 80px 48px 40px;
+    text-align: center;
+  }
+
+  @media (max-width: 900px) { .contact-hero { padding: 48px 24px 32px; } }
+
+  .contact-hero h1 {
+    font-family: var(--font-display);
+    font-size: clamp(44px, 5vw, 68px);
+    font-weight: 400;
+    font-variation-settings: "opsz" 144, "SOFT" 40;
+    line-height: 1.1;
+    color: var(--ink);
+    margin-top: 24px;
+    margin-bottom: 28px;
+  }
+
+  .contact-hero .lede {
+    font-family: var(--font-display);
+    font-size: clamp(20px, 2vw, 24px);
+    font-weight: 300;
+    font-variation-settings: "opsz" 60;
+    line-height: 1.5;
+    color: var(--ink-soft);
+  }
+
+  .contact-options {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 60px 48px 80px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px;
+  }
+
+  @media (max-width: 900px) {
+    .contact-options {
+      grid-template-columns: 1fr;
+      padding: 40px 24px 60px;
+      gap: 32px;
+    }
+  }
+
+  .contact-card {
+    background: var(--cream);
+    padding: 40px 32px;
+    border-radius: 2px;
+    border: 1px solid var(--rule);
+    text-align: center;
+  }
+
+  .contact-icon {
+    font-family: var(--font-display);
+    font-size: 32px;
+    font-weight: 400;
+    color: var(--oxblood);
+    width: 64px;
+    height: 64px;
+    line-height: 64px;
+    margin: 0 auto 20px;
+    border: 1px solid var(--oxblood);
+    border-radius: 50%;
+  }
+
+  .contact-card h3 {
+    font-family: var(--font-display);
+    font-size: 24px;
+    font-weight: 500;
+    color: var(--ink);
+    margin-bottom: 12px;
+  }
+
+  .contact-card p {
+    font-family: var(--font-body);
+    font-size: 15px;
+    line-height: 1.5;
+    color: var(--ink-soft);
+    margin-bottom: 20px;
+  }
+
+  .contact-email {
+    font-family: var(--font-body);
+    font-size: 16px;
+    color: var(--oxblood);
+    text-decoration: none;
+    border-bottom: 1px solid var(--oxblood);
+    padding-bottom: 2px;
+    display: inline-block;
+    margin-bottom: 16px;
+    word-break: break-all;
+  }
+
+  .contact-email:hover { color: var(--oxblood-deep); border-color: var(--oxblood-deep); }
+
+  .response-time {
+    font-size: 13px !important;
+    color: var(--sepia) !important;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 0 !important;
+  }
+
+  .affiliation {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 80px 48px;
+    text-align: center;
+    border-top: 1px solid var(--rule);
+  }
+
+  @media (max-width: 900px) { .affiliation { padding: 60px 24px; } }
+
+  .affiliation h3 {
+    font-family: var(--font-display);
+    font-size: 24px;
+    font-weight: 400;
+    color: var(--ink);
+    margin-bottom: 28px;
+  }
+
+  .affiliation p {
+    font-family: var(--font-body);
+    font-size: 16px;
+    line-height: 1.8;
+    color: var(--ink-soft);
+    margin-bottom: 20px;
+  }
+
+  .mu-email a {
+    color: var(--oxblood);
+    text-decoration: none;
+    border-bottom: 1px solid var(--oxblood);
+    padding-bottom: 2px;
+  }
+</style>

@@ -1,0 +1,710 @@
+---
+import Base from '../layouts/Base.astro';
+import { getCollection } from 'astro:content';
+
+const allEndorsements = await getCollection('endorsements');
+const sorted = allEndorsements.sort((a, b) => a.data.order - b.data.order);
+
+const leadQuote = sorted.find(e => e.data.tier === 'lead');
+const featured = sorted.filter(e => e.data.tier === 'featured');
+const supporting = sorted.filter(e => e.data.tier === 'supporting');
+const reviews = sorted.filter(e => e.data.tier === 'review');
+---
+
+<Base
+  title="Between Interpretation and Imagination — Leslie Baynes"
+  description="Between Interpretation and Imagination: C. S. Lewis and the Bible (Eerdmans, 2025) — the first full-length study of how Lewis actually read Scripture, drawing on never-before-published marginalia from his personal library."
+  activePage="book"
+>
+
+  <!-- HERO -->
+  <section class="book-hero">
+    <div class="book-cover-real">
+      <img
+        src="/images/book-cover-large.jpg"
+        alt="Between Interpretation and Imagination: C. S. Lewis and the Bible"
+        loading="eager"
+        fetchpriority="high"
+      />
+    </div>
+
+    <div class="book-hero-text">
+      <div class="meta">Eerdmans &middot; 2025 &middot; 350 pp.</div>
+      <h1>Between Interpretation &amp; Imagination</h1>
+      <p class="subtitle">C. S. Lewis and the Bible</p>
+
+      <p class="question">
+        How did the twentieth century&rsquo;s most beloved Christian writer actually read Scripture?
+      </p>
+
+      <p class="desc">
+        Drawing on never-before-published marginalia from C. S. Lewis&rsquo;s personal library,
+        alongside his letters, essays, and fiction, <em>Between Interpretation and Imagination</em>
+        is the first full-length study of Lewis&rsquo;s engagement with the Bible &mdash; and the
+        first to treat him with the scholarly seriousness he both demanded and deserved.
+      </p>
+
+      <div class="purchase-buttons">
+        <a href="#" class="btn primary">Bookshop.org</a>
+        <a href="#" class="btn">Eerdmans</a>
+        <a href="#" class="btn">Amazon</a>
+        <a href="#" class="btn">Barnes &amp; Noble</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRAISE -->
+  <section class="praise-section">
+    <div class="praise-inner">
+      <div class="praise-header">
+        <div class="section-label">Praise</div>
+        <h2>What scholars are saying</h2>
+      </div>
+
+      {leadQuote && (
+        <div class="lead-quote">
+          <blockquote set:html={leadQuote.body.replace(/^"|"$/g, '')}></blockquote>
+          <cite>
+            <strong>{leadQuote.data.author}</strong>
+            {leadQuote.data.affiliation}
+            {leadQuote.data.bookTitle && (
+              <> &middot; author of <em>{leadQuote.data.bookTitle}</em></>
+            )}
+          </cite>
+        </div>
+      )}
+
+      {featured.length > 0 && (
+        <div class="praise-tier-2">
+          {featured.map(e => (
+            <div class="praise-item">
+              <blockquote>&ldquo;<span set:html={e.body.replace(/^"|"$/g, '')} />&rdquo;</blockquote>
+              <cite>
+                <strong>{e.data.author}</strong>
+                {e.data.affiliation}
+                {e.data.bookTitle && (
+                  <> &middot; author of <em>{e.data.bookTitle}</em></>
+                )}
+              </cite>
+            </div>
+          ))}
+        </div>
+      )}
+
+      {supporting.length > 0 && (
+        <div class="praise-tier-3">
+          {supporting.map(e => (
+            <div class="praise-small">
+              <blockquote>&ldquo;<span set:html={e.body.replace(/^"|"$/g, '')} />&rdquo;</blockquote>
+              <cite><strong>{e.data.author}</strong>{e.data.affiliation}</cite>
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
+  </section>
+
+  <!-- ABOUT THE BOOK -->
+  <section class="about-book">
+    <div class="section-label">About the Book</div>
+    <h2>A literary genius reads a sacred book</h2>
+
+    <p>
+      Lewis is the most widely read Christian writer of the last century. The Chronicles of Narnia
+      have sold more than a hundred million copies. <em>Mere Christianity</em> reshaped modern
+      apologetics. Generations have taken their first theological bearings from his prose.
+    </p>
+
+    <p class="accent-line">
+      And yet &mdash; until now &mdash; no one has written a book-length study of how he actually
+      read the Bible.
+    </p>
+
+    <p>
+      In <em>Between Interpretation and Imagination</em>, Leslie Baynes brings a New Testament
+      scholar&rsquo;s tools to the question. She reconstructs Lewis&rsquo;s scriptural formation
+      from his Belfast childhood through his Oxford years to the final Cambridge decade, identifies
+      the figures who shaped his interpretive instincts &mdash; Charles Gore, James Moffatt, and
+      others largely forgotten outside academic theology &mdash; and examines the marginalia Lewis
+      left in his own copies of commentaries and Bibles. Many of those notes appear here in print
+      for the first time.
+    </p>
+
+    <p>
+      The book is direct where Lewis was wrong and generous where he was brilliant. Baynes argues
+      that Lewis&rsquo;s nonfiction engagement with academic biblical scholarship &mdash; including
+      his famous essay <em>&ldquo;Modern Theology and Biblical Criticism&rdquo;</em> and the
+      <em>&ldquo;Liar, Lunatic, Lord&rdquo;</em> argument &mdash; is weaker than his admirers
+      believe. But she finds that Lewis&rsquo;s greatest gift as a reader of Scripture was never
+      exegetical. It was imaginative.
+    </p>
+
+    <p>
+      The Chronicles of Narnia, she shows, are saturated with biblical and classical allusion in
+      ways even devoted readers have missed: the talking animals rooted in rabbinic tradition, the
+      Calormene theology drawn from ancient sources, Aslan&rsquo;s death and return carrying more
+      than the obvious cross-shaped echo. It is, in the end, a book about how a literary genius
+      reads a sacred book &mdash; and about what the rest of us can learn from both his failures
+      and his triumphs.
+    </p>
+  </section>
+
+  <!-- CONTENTS -->
+  <section class="contents">
+    <div class="contents-inner">
+      <div class="section-label">Table of Contents</div>
+      <h2>What&rsquo;s inside</h2>
+
+      <div class="contents-part">
+        <h3>Part One</h3>
+        <p class="subtitle">Lewis&rsquo;s Life with Scripture: A Brief Biography</p>
+        <ul>
+          <li>Earliest Engagements: 1898&ndash;1932</li>
+          <li>Reading about Scripture: The 1930s</li>
+          <li>Writing about Scripture: 1932&ndash;1949</li>
+          <li>Fruition: 1950&ndash;1963</li>
+        </ul>
+      </div>
+
+      <div class="contents-part">
+        <h3>Part Two</h3>
+        <p class="subtitle">Case Studies and Controversies: Lewis the &ldquo;Bonny Fighter&rdquo;</p>
+        <ul>
+          <li>&ldquo;We Are Not Fundamentalists&rdquo;: Lewis among the Evangelicals</li>
+          <li>Myth as Fact or Fiction? Lewis vs. Bultmann</li>
+          <li>The &ldquo;Liar, Lunatic, Lord&rdquo; Argument</li>
+          <li>Lewis and the Gospel of John</li>
+          <li>Scripture in the Chronicles of Narnia</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- AUTHOR -->
+  <section class="author-block">
+    <div class="author-image">
+      <img
+        src="/images/headshot-medium.jpg"
+        alt="Leslie Baynes"
+        loading="lazy"
+      />
+    </div>
+    <div class="author-text">
+      <div class="section-label">About the Author</div>
+      <h2>Leslie Baynes</h2>
+      <p>
+        Leslie Baynes is Professor of Religious Studies at Missouri State University and a
+        translator of the New American Bible Revised Edition. She has served as Scholar-in-Residence
+        at The Kilns &mdash; C. S. Lewis&rsquo;s home outside Oxford &mdash; and as a fellow of the
+        Inklings Project at the University of Notre Dame&rsquo;s McGrath Institute for Church Life.
+      </p>
+      <p>
+        She is the author of <em>The Heavenly Book Motif in Judeo-Christian Apocalypses 200
+        BCE&ndash;200 CE</em> (Brill, 2012) and writes on apocalyptic literature, 1 Enoch, the Book
+        of Revelation, and the reception history of biblical texts.
+      </p>
+      <a href="/about" class="link">Read the full biography &rarr;</a>
+    </div>
+  </section>
+
+</Base>
+
+<style>
+  /* BOOK HERO */
+  .book-hero {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 80px 48px 100px;
+    display: grid;
+    grid-template-columns: 0.75fr 1fr;
+    gap: 100px;
+    align-items: start;
+  }
+
+  @media (max-width: 900px) {
+    .book-hero {
+      grid-template-columns: 1fr;
+      padding: 48px 24px 60px;
+      gap: 48px;
+    }
+  }
+
+  .book-cover-real {
+    position: relative;
+    aspect-ratio: 1838/2775;
+    box-shadow:
+      -3px 3px 0 #d8cdb5,
+      0 4px 6px rgba(35, 28, 21, 0.08),
+      0 40px 80px rgba(35, 28, 21, 0.22),
+      0 80px 140px rgba(35, 28, 21, 0.1);
+    overflow: hidden;
+    border-radius: 1px;
+    position: sticky;
+    top: 40px;
+  }
+
+  .book-cover-real::before {
+    content: '';
+    position: absolute;
+    top: 0; bottom: 0; left: 0;
+    width: 10px;
+    background: linear-gradient(to right, rgba(0,0,0,0.2), transparent);
+    z-index: 2;
+    pointer-events: none;
+  }
+
+  @media (max-width: 900px) {
+    .book-cover-real {
+      position: static;
+      max-width: 360px;
+      margin: 0 auto;
+    }
+  }
+
+  .book-hero-text .meta {
+    font-family: var(--font-body);
+    font-size: 12px;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--sepia);
+    margin-bottom: 28px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+
+  .book-hero-text .meta::before {
+    content: '';
+    width: 40px;
+    height: 1px;
+    background: var(--sepia);
+  }
+
+  .book-hero-text h1 {
+    font-family: var(--font-display);
+    font-size: clamp(48px, 6vw, 84px);
+    font-weight: 400;
+    font-variation-settings: "opsz" 144, "SOFT" 40, "WONK" 1;
+    line-height: 1.02;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+    margin-bottom: 16px;
+  }
+
+  .book-hero-text .subtitle {
+    font-family: var(--font-display);
+    font-size: clamp(24px, 2.6vw, 32px);
+    font-weight: 300;
+    font-style: italic;
+    color: var(--ink-muted);
+    margin-bottom: 40px;
+  }
+
+  .book-hero-text .question {
+    font-family: var(--font-display);
+    font-size: clamp(22px, 2.2vw, 28px);
+    font-weight: 400;
+    line-height: 1.35;
+    color: var(--ink);
+    margin-bottom: 28px;
+    max-width: 620px;
+  }
+
+  .book-hero-text .desc {
+    font-size: 18px;
+    line-height: 1.7;
+    color: var(--ink-soft);
+    max-width: 580px;
+    margin-bottom: 20px;
+  }
+
+  .purchase-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 44px;
+  }
+
+  /* PRAISE */
+  .praise-section {
+    background: var(--cream);
+    padding: 120px 48px;
+    border-top: 1px solid var(--rule);
+    border-bottom: 1px solid var(--rule);
+  }
+
+  @media (max-width: 900px) {
+    .praise-section { padding: 80px 24px; }
+  }
+
+  .praise-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .praise-header {
+    text-align: center;
+    margin-bottom: 80px;
+  }
+
+  .praise-header h2 {
+    font-family: var(--font-display);
+    font-size: clamp(38px, 4.4vw, 58px);
+    font-weight: 400;
+    font-variation-settings: "opsz" 144, "SOFT" 30;
+    color: var(--ink);
+    letter-spacing: -0.01em;
+    margin-top: 16px;
+  }
+
+  .lead-quote {
+    max-width: 900px;
+    margin: 0 auto 100px;
+    text-align: center;
+    position: relative;
+  }
+
+  .lead-quote::before {
+    content: '\201C';
+    font-family: var(--font-display);
+    font-size: 180px;
+    color: var(--oxblood);
+    opacity: 0.12;
+    position: absolute;
+    top: -40px;
+    left: -20px;
+    line-height: 1;
+  }
+
+  .lead-quote blockquote {
+    font-family: var(--font-display);
+    font-size: clamp(26px, 3.2vw, 40px);
+    font-weight: 300;
+    font-variation-settings: "opsz" 60;
+    line-height: 1.3;
+    color: var(--ink);
+    margin-bottom: 36px;
+    letter-spacing: -0.005em;
+    position: relative;
+  }
+
+  .lead-quote cite {
+    font-family: var(--font-body);
+    font-style: normal;
+    font-size: 15px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+  }
+
+  .lead-quote cite strong {
+    color: var(--ink);
+    font-weight: 600;
+    display: block;
+    margin-bottom: 4px;
+    letter-spacing: 0.14em;
+  }
+
+  .praise-tier-2 {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 60px;
+    margin-bottom: 100px;
+    padding-top: 80px;
+    border-top: 1px solid var(--rule);
+  }
+
+  @media (max-width: 900px) {
+    .praise-tier-2 { grid-template-columns: 1fr; gap: 60px; }
+  }
+
+  .praise-item blockquote {
+    font-family: var(--font-display);
+    font-size: 19px;
+    font-weight: 400;
+    font-variation-settings: "opsz" 60;
+    line-height: 1.55;
+    color: var(--ink);
+    margin-bottom: 20px;
+    font-style: italic;
+  }
+
+  .praise-item cite {
+    font-family: var(--font-body);
+    font-style: normal;
+    font-size: 13px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+    line-height: 1.5;
+    display: block;
+  }
+
+  .praise-item cite strong {
+    color: var(--ink);
+    font-weight: 600;
+    display: block;
+    margin-bottom: 4px;
+    font-size: 14px;
+    letter-spacing: 0.12em;
+  }
+
+  .praise-tier-3 {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 48px;
+    padding-top: 80px;
+    border-top: 1px solid var(--rule);
+  }
+
+  @media (max-width: 720px) {
+    .praise-tier-3 { grid-template-columns: 1fr; }
+  }
+
+  .praise-small blockquote {
+    font-family: var(--font-body);
+    font-size: 16px;
+    line-height: 1.6;
+    color: var(--ink-soft);
+    font-style: italic;
+    margin-bottom: 14px;
+  }
+
+  .praise-small cite {
+    font-family: var(--font-body);
+    font-style: normal;
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+    display: block;
+  }
+
+  .praise-small cite strong {
+    color: var(--ink);
+    font-weight: 600;
+    display: block;
+    margin-bottom: 2px;
+    font-size: 13px;
+    letter-spacing: 0.12em;
+  }
+
+  /* ABOUT BOOK */
+  .about-book {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 120px 48px;
+  }
+
+  @media (max-width: 900px) {
+    .about-book { padding: 80px 24px; }
+  }
+
+  .about-book .section-label {
+    text-align: center;
+    display: block;
+    margin-bottom: 20px;
+  }
+
+  .about-book h2 {
+    font-family: var(--font-display);
+    font-size: clamp(36px, 4.4vw, 56px);
+    font-weight: 400;
+    font-variation-settings: "opsz" 144, "SOFT" 30;
+    color: var(--ink);
+    text-align: center;
+    margin-bottom: 64px;
+    letter-spacing: -0.01em;
+  }
+
+  .about-book p {
+    font-family: var(--font-body);
+    font-size: 19px;
+    line-height: 1.75;
+    color: var(--ink-soft);
+    margin-bottom: 28px;
+  }
+
+  .about-book p:first-of-type::first-letter {
+    font-family: var(--font-display);
+    font-size: 72px;
+    font-weight: 400;
+    font-variation-settings: "opsz" 144;
+    float: left;
+    line-height: 0.85;
+    padding-top: 6px;
+    padding-right: 12px;
+    padding-bottom: 0;
+    color: var(--oxblood-deep);
+  }
+
+  .about-book .accent-line {
+    font-family: var(--font-display);
+    font-size: 22px;
+    font-weight: 400;
+    font-style: italic;
+    color: var(--ink);
+    text-align: center;
+    padding: 40px 0;
+    max-width: 600px;
+    margin: 40px auto;
+    border-top: 1px solid var(--rule);
+    border-bottom: 1px solid var(--rule);
+  }
+
+  /* CONTENTS */
+  .contents {
+    background: var(--ivory-deep);
+    padding: 100px 48px;
+  }
+
+  @media (max-width: 900px) {
+    .contents { padding: 60px 24px; }
+  }
+
+  .contents-inner {
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .contents .section-label {
+    text-align: center;
+    display: block;
+    margin-bottom: 20px;
+  }
+
+  .contents h2 {
+    font-family: var(--font-display);
+    font-size: clamp(32px, 3.6vw, 44px);
+    font-weight: 400;
+    font-variation-settings: "opsz" 144;
+    color: var(--ink);
+    text-align: center;
+    margin-bottom: 56px;
+  }
+
+  .contents-part {
+    margin-bottom: 56px;
+    padding-bottom: 40px;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .contents-part:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+  }
+
+  .contents-part h3 {
+    font-family: var(--font-display);
+    font-size: 24px;
+    font-weight: 400;
+    color: var(--ink);
+    margin-bottom: 6px;
+  }
+
+  .contents-part .subtitle {
+    font-family: var(--font-display);
+    font-style: italic;
+    color: var(--ink-muted);
+    font-size: 18px;
+    margin-bottom: 28px;
+  }
+
+  .contents-part ul {
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px 40px;
+  }
+
+  @media (max-width: 720px) {
+    .contents-part ul { grid-template-columns: 1fr; }
+  }
+
+  .contents-part li {
+    font-family: var(--font-body);
+    font-size: 16px;
+    line-height: 1.5;
+    color: var(--ink-soft);
+    padding-left: 28px;
+    position: relative;
+  }
+
+  .contents-part li::before {
+    content: counter(chapters, upper-roman) '.';
+    counter-increment: chapters;
+    font-family: var(--font-display);
+    font-style: italic;
+    color: var(--sepia);
+    position: absolute;
+    left: 0;
+    font-size: 14px;
+  }
+
+  .contents-part ul {
+    counter-reset: chapters;
+  }
+
+  /* AUTHOR BLOCK */
+  .author-block {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 120px 48px;
+    display: grid;
+    grid-template-columns: 1fr 1.5fr;
+    gap: 80px;
+    align-items: center;
+  }
+
+  @media (max-width: 900px) {
+    .author-block {
+      grid-template-columns: 1fr;
+      padding: 80px 24px;
+      gap: 48px;
+    }
+  }
+
+  .author-image {
+    aspect-ratio: 4/5;
+    overflow: hidden;
+    border-radius: 2px;
+    box-shadow: 0 20px 40px rgba(35, 28, 21, 0.1);
+  }
+
+  .author-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 18%;
+  }
+
+  .author-text h2 {
+    font-family: var(--font-display);
+    font-size: clamp(32px, 3.6vw, 46px);
+    font-weight: 400;
+    font-variation-settings: "opsz" 144;
+    color: var(--ink);
+    margin-top: 16px;
+    margin-bottom: 28px;
+    line-height: 1.1;
+  }
+
+  .author-text p {
+    font-family: var(--font-body);
+    font-size: 17px;
+    line-height: 1.7;
+    color: var(--ink-soft);
+    margin-bottom: 20px;
+  }
+
+  .author-text .link {
+    font-family: var(--font-body);
+    color: var(--oxblood);
+    text-decoration: none;
+    font-size: 16px;
+    border-bottom: 1px solid var(--oxblood);
+    padding-bottom: 2px;
+    display: inline-block;
+    margin-top: 12px;
+  }
+</style>
