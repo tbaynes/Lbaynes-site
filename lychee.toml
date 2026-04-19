@@ -1,0 +1,37 @@
+# Lychee link checker configuration
+# https://lychee.cli.rs/#/usage/config
+
+cache = true
+max_cache_age = "1d"
+max_concurrency = 4
+max_retries = 2
+timeout = 20
+user_agent = "Mozilla/5.0 (compatible; lbaynes-site link-checker; +https://lesliebaynes.com)"
+accept = [ "200", "204", "206", "999" ]
+verbose = "info"
+include_mail = false
+
+exclude = [
+  "^#$",
+  "^http://localhost",
+  "^https?://127\\.0\\.0\\.1",
+  "^#.+",
+  "^https?://(www\\.)?amazon\\.(com|ca|co\\.uk)",
+  "^https?://(www\\.)?(twitter\\.com|x\\.com)",
+  "^https?://(www\\.)?linkedin\\.com",
+  "^https?://(www\\.)?facebook\\.com",
+  "^mailto:",
+]
+
+include = [
+  "**/*.html",
+  "**/*.md",
+  "**/*.astro",
+]
+
+exclude_path = [
+  "node_modules",
+  "dist",
+  ".astro",
+  ".github",
+]
