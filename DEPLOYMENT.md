@@ -278,6 +278,19 @@ Netlify auto-deploys within 60 seconds.
 Analytics start recording within minutes. Clarity shows heatmaps after ~50 pageviews.
 
 ---
+## Step 8.5 — Automated link checking (already wired up)
+
+A GitHub Action at `.github/workflows/link-check.yml` runs automatically:
+
+- **On every push to `main`** — immediate check after any change
+- **Every Monday at 3am Central** — catches link rot over time
+- **Manually from the Actions tab** — whenever you want a fresh scan
+
+Check results at `github.com/lesliebaynesphd/lbaynes-site/actions`.
+
+Broken links found during the weekly scan automatically open a GitHub Issue with the full report.
+
+---
 
 ## Step 9 — Launch checklist (~30 min)
 
