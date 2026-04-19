@@ -23,12 +23,6 @@ exclude = [
   "^mailto:",
 ]
 
-include = [
-  "**/*.html",
-  "**/*.md",
-  "**/*.astro",
-]
-
 exclude_path = [
   "node_modules",
   "dist",
