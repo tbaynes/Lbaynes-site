@@ -1,4 +1,4 @@
-# lesliebaynes.com
+# lesliebaynesphd.com
 
 Personal website for Leslie Baynes — biblical scholar, author of *Between Interpretation and Imagination: C. S. Lewis and the Bible* (Eerdmans, 2025), and Professor of Religious Studies at Missouri State University.
 
