@@ -1,5 +1,6 @@
 backend:
   name: git-gateway
+  repo: tbaynes/Lbaynes-site
   branch: main
 
 # Where uploaded images go
