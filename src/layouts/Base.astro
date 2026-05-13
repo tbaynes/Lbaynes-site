@@ -67,12 +67,12 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
   -->
 
   <!-- Netlify Identity widget — required for Decap CMS admin login -->
-  <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
-</head>
+  <script is:inline src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+  </head>
 
 <body>
   <!-- Redirect from /admin if a non-logged-in visitor arrives via invitation link -->
-  <script>
+  <script is:inline>
     if (window.netlifyIdentity) {
       window.netlifyIdentity.on("init", user => {
         if (!user) {
