@@ -1,61 +1,52 @@
 ---
 import Base from '../layouts/Base.astro';
+import { getEntry } from 'astro:content';
+
+const page = await getEntry('pages', 'contact');
+if (!page || page.data.page !== 'contact') {
+  throw new Error('Missing contact page content entry (src/content/pages/contact.md)');
+}
+const data = page.data;
 ---
 
 <Base
-  title="Contact — Leslie Baynes"
-  description="Contact Leslie Baynes for media inquiries, speaking invitations, and academic correspondence."
+  title={data.pageTitle}
+  description={data.pageDescription}
   activePage="contact"
 >
 
   <section class="contact-hero">
-    <div class="section-label">Contact</div>
-    <h1>Get in touch</h1>
-    <p class="lede">
-      Please use the appropriate address below so your message reaches Leslie directly and gets a
-      timely response.
-    </p>
+    <div class="section-label">{data.sectionLabel}</div>
+    <h1>{data.heading}</h1>
+    <p class="lede">{data.lede}</p>
   </section>
 
   <section class="contact-options">
-    <div class="contact-card">
-      <div class="contact-icon">M</div>
-      <h3>Media &amp; Press</h3>
-      <p>Podcast bookings, interviews, press inquiries, and permissions.</p>
-      <a href="mailto:media@lesliebaynes.com" class="contact-email">media@lesliebaynes.com</a>
-      <p class="response-time">Response within 3&ndash;5 business days</p>
-    </div>
-
-    <div class="contact-card">
-      <div class="contact-icon">S</div>
-      <h3>Speaking &amp; Events</h3>
-      <p>Keynotes, academic panels, book clubs, webinars, and conference invitations.</p>
-      <a href="mailto:speaking@lesliebaynes.com" class="contact-email">speaking@lesliebaynes.com</a>
-      <p class="response-time">Response within 3&ndash;5 business days</p>
-    </div>
-
-    <div class="contact-card">
-      <div class="contact-icon">A</div>
-      <h3>Academic &amp; General</h3>
-      <p>Scholarly correspondence, student inquiries, and general messages.</p>
-      <a href="mailto:hello@lesliebaynes.com" class="contact-email">hello@lesliebaynes.com</a>
-      <p class="response-time">Response within 1 week</p>
-    </div>
+    {data.contactCards.map(card => (
+      <div class="contact-card">
+        <div class="contact-icon">{card.icon}</div>
+        <h3 set:html={card.heading}></h3>
+        <p>{card.body}</p>
+        <a href={`mailto:${card.email}`} class="contact-email">{card.email}</a>
+        <p class="response-time" set:html={card.responseTime}></p>
+      </div>
+    ))}
   </section>
 
   <section class="affiliation">
-    <h3>Institutional affiliation</h3>
+    <h3>{data.affiliationHeading}</h3>
     <p>
-      Leslie Baynes<br />
-      Professor of Religious Studies<br />
-      Department of Languages, Cultures, and Religions<br />
-      Missouri State University<br />
-      901 S. National Ave.<br />
-      Springfield, MO 65897
+      {data.affiliationLines.map((line, i) => (
+        <Fragment>
+          {line}{i < data.affiliationLines.length - 1 && <br />}
+        </Fragment>
+      ))}
     </p>
-    <p class="mu-email">
-      <a href="mailto:lbaynes@missouristate.edu">lbaynes@missouristate.edu</a>
-    </p>
+    {data.affiliationEmail && (
+      <p class="mu-email">
+        <a href={`mailto:${data.affiliationEmail}`}>{data.affiliationEmail}</a>
+      </p>
+    )}
   </section>
 
 </Base>

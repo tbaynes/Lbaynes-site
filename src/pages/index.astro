@@ -1,6 +1,12 @@
 ---
 import Base from '../layouts/Base.astro';
-import { getCollection } from 'astro:content';
+import { getCollection, getEntry } from 'astro:content';
+
+const page = await getEntry('pages', 'home');
+if (!page || page.data.page !== 'home') {
+  throw new Error('Missing home page content entry (src/content/pages/home.md)');
+}
+const data = page.data;
 
 // Pull top 8 podcast appearances, most recent first
 const allPodcasts = await getCollection('podcasts');
@@ -13,32 +19,29 @@ const allEndorsements = await getCollection('endorsements');
 const leadEndorsement = allEndorsements.find(e => e.data.tier === 'lead');
 ---
 
-<Base title="Leslie Baynes — Biblical Scholar" activePage="home">
+<Base title={data.pageTitle} description={data.pageDescription} activePage="home">
 
   <!-- HERO -->
   <section class="hero">
     <div class="hero-text">
       <div class="eyebrow animate-rise" style="animation-delay: 0.05s;">
-        Biblical Scholar · Author · Translator
+        {data.heroEyebrow}
       </div>
       <h1 class="animate-rise" style="animation-delay: 0.15s;">
-        Reading Scripture, reading Lewis.
+        {data.heroHeadline}
       </h1>
       <p class="lede animate-rise" style="animation-delay: 0.3s;">
-        Leslie Baynes is a scholar of the New Testament and Second Temple Judaism whose work ranges
-        from ancient apocalyptic literature to the Christian imagination of the twentieth century &mdash;
-        from 1 Enoch to Narnia, often in the same week.
+        {data.heroLede}
       </p>
       <p class="credential animate-rise" style="animation-delay: 0.45s;">
-        Professor of Religious Studies at Missouri State University. Translator of the New American
-        Bible Revised Edition, approved for Catholic liturgical use in June 2025.
+        {data.heroCredential}
       </p>
     </div>
 
     <div class="hero-image animate-fade" style="animation-delay: 0.2s;">
       <img
-        src="/images/headshot-hero.jpg"
-        alt="Portrait of Leslie Baynes"
+        src={data.heroImage}
+        alt={data.heroImageAlt}
         loading="eager"
         fetchpriority="high"
       />
@@ -51,24 +54,19 @@ const leadEndorsement = allEndorsements.find(e => e.data.tier === 'lead');
 
   <!-- BOOK FEATURE -->
   <section class="book-feature">
-    <a href="/book" class="book-cover-real">
+    <a href={data.bookPrimaryCtaHref} class="book-cover-real">
       <img
-        src="/images/book-cover-medium.jpg"
-        alt="Between Interpretation and Imagination: C. S. Lewis and the Bible"
+        src={data.bookCoverImage}
+        alt={data.bookCoverAlt}
         loading="lazy"
       />
     </a>
 
     <div class="book-text">
-      <div class="section-label">New &mdash; Eerdmans, 2025</div>
-      <h2>Between Interpretation &amp; Imagination</h2>
-      <p class="book-subtitle">C. S. Lewis and the Bible</p>
-      <p class="desc">
-        Drawing on never-before-published marginalia from Lewis&rsquo;s personal library, alongside
-        his letters, essays, and fiction, <em>Between Interpretation and Imagination</em> is the
-        first full-length study of Lewis&rsquo;s engagement with Scripture &mdash; and the first to
-        treat him with the scholarly seriousness he both demanded and deserved.
-      </p>
+      <div class="section-label">{data.bookSectionLabel}</div>
+      <h2>{data.bookTitle}</h2>
+      <p class="book-subtitle">{data.bookSubtitle}</p>
+      <p class="desc" set:html={data.bookDescription}></p>
 
       {leadEndorsement && (
         <div class="endorsement-preview">
@@ -84,17 +82,18 @@ const leadEndorsement = allEndorsements.find(e => e.data.tier === 'lead');
       )}
 
       <div class="purchase-buttons">
-        <a href="/book" class="btn primary">Read More</a>
-        <a href="#" class="btn">Bookshop.org</a>
-        <a href="#" class="btn">Eerdmans</a>
+        <a href={data.bookPrimaryCtaHref} class="btn primary">{data.bookPrimaryCtaLabel}</a>
+        {data.bookSecondaryButtons.map(btn => (
+          <a href={btn.url} class="btn">{btn.label}</a>
+        ))}
       </div>
     </div>
   </section>
 
   <!-- RECENT APPEARANCES -->
   <section class="appearances">
-    <div class="section-label">Recently On</div>
-    <h3>In conversation</h3>
+    <div class="section-label">{data.appearancesEyebrow}</div>
+    <h3>{data.appearancesHeading}</h3>
     <div class="podcast-grid">
       {recentPodcasts.map((podcast, i) => (
         <span class="podcast-item">
@@ -102,29 +101,19 @@ const leadEndorsement = allEndorsements.find(e => e.data.tier === 'lead');
         </span>
       ))}
     </div>
-    <a href="/media" class="see-all">See all appearances &rarr;</a>
+    <a href={data.appearancesSeeAllHref} class="see-all">{data.appearancesSeeAllLabel}</a>
   </section>
 
   <!-- THREE PATHS -->
   <section class="paths">
-    <a href="/book" class="path-card">
-      <div class="path-number">I.</div>
-      <h4>For Readers</h4>
-      <p>Learn about the book, read excerpts, and find it at your bookseller of choice.</p>
-      <span class="path-link">The Book</span>
-    </a>
-    <a href="/media" class="path-card">
-      <div class="path-number">II.</div>
-      <h4>For Event Organizers</h4>
-      <p>Topics, press kit, past appearances, and booking information for podcasts, keynotes, and panels.</p>
-      <span class="path-link">Media &amp; Speaking</span>
-    </a>
-    <a href="/about" class="path-card">
-      <div class="path-number">III.</div>
-      <h4>For Scholars</h4>
-      <p>Academic publications, research interests, teaching, and a downloadable CV.</p>
-      <span class="path-link">About &amp; CV</span>
-    </a>
+    {data.paths.map(p => (
+      <a href={p.linkHref} class="path-card">
+        <div class="path-number">{p.number}</div>
+        <h4>{p.heading}</h4>
+        <p>{p.body}</p>
+        <span class="path-link">{p.linkLabel}</span>
+      </a>
+    ))}
   </section>
 
 </Base>

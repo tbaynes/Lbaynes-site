@@ -1,6 +1,7 @@
 ---
 import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
+import { getEntry } from 'astro:content';
 import '../styles/global.css';
 
 interface Props {
@@ -9,12 +10,16 @@ interface Props {
   activePage?: 'home' | 'book' | 'about' | 'media' | 'writing' | 'contact';
 }
 
+const settingsEntry = await getEntry('settings', 'site');
+const settings = settingsEntry?.data;
+
 const {
   title,
-  description = 'Leslie Baynes — biblical scholar, author of Between Interpretation and Imagination: C. S. Lewis and the Bible, translator of the New American Bible Revised Edition, and Professor of Religious Studies at Missouri State University.',
+  description = settings?.defaultDescription ?? 'Leslie Baynes — biblical scholar, author of Between Interpretation and Imagination: C. S. Lewis and the Bible, translator of the New American Bible Revised Edition, and Professor of Religious Studies at Missouri State University.',
   activePage = 'home'
 } = Astro.props;
 
+const ogImagePath = settings?.ogImage ?? '/images/book-cover-large.jpg';
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 ---
 
@@ -31,13 +36,13 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
   <meta property="og:url" content={canonicalURL} />
   <meta property="og:title" content={title} />
   <meta property="og:description" content={description} />
-  <meta property="og:image" content={new URL('/images/book-cover-large.jpg', Astro.site)} />
+  <meta property="og:image" content={new URL(ogImagePath, Astro.site)} />
 
   <!-- Twitter -->
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content={title} />
   <meta name="twitter:description" content={description} />
-  <meta name="twitter:image" content={new URL('/images/book-cover-large.jpg', Astro.site)} />
+  <meta name="twitter:image" content={new URL(ogImagePath, Astro.site)} />
 
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
