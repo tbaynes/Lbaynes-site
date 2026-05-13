@@ -91,3 +91,211 @@ collections:
       - { label: "Summary", name: "summary", widget: "text", required: false, hint: "1–2 sentences describing the piece." }
       - { label: "Display order", name: "order", widget: "number", default: 100, value_type: "int", required: false }
       - { label: "Body (optional)", name: "body", widget: "markdown", required: false, hint: "Only used if you want to include the full text. Usually left empty." }
+
+  # ═══════════════════════════════════════════════════════════
+  # STATIC PAGES (Home / About / Book / Contact)
+  # ═══════════════════════════════════════════════════════════
+  - name: "pages"
+    label: "Pages"
+    label_singular: "Page"
+    description: "Edit the text on the Home, About, Book, and Contact pages."
+    files:
+      - label: "Home"
+        name: "home"
+        file: "src/content/pages/home.md"
+        fields:
+          - { label: "Page type (internal)", name: "page", widget: "hidden", default: "home" }
+          - { label: "Page title (browser tab + social share)", name: "pageTitle", widget: "string" }
+          - { label: "Page description (meta + social share)", name: "pageDescription", widget: "text", required: false }
+
+          - { label: "Hero — eyebrow", name: "heroEyebrow", widget: "string", hint: "The small line above the headline, e.g. 'Biblical Scholar · Author · Translator'" }
+          - { label: "Hero — headline", name: "heroHeadline", widget: "string", hint: "The big display sentence at the top of the page." }
+          - { label: "Hero — lede paragraph", name: "heroLede", widget: "text", hint: "The first prose paragraph beneath the headline." }
+          - { label: "Hero — credential paragraph", name: "heroCredential", widget: "text", hint: "The second paragraph, typically the affiliation/role line." }
+          - { label: "Hero — image path", name: "heroImage", widget: "string", default: "/images/headshot-hero.jpg" }
+          - { label: "Hero — image alt text", name: "heroImageAlt", widget: "string", default: "Portrait of Leslie Baynes" }
+
+          - { label: "Book section — eyebrow", name: "bookSectionLabel", widget: "string" }
+          - { label: "Book section — cover image", name: "bookCoverImage", widget: "string", default: "/images/book-cover-medium.jpg" }
+          - { label: "Book section — cover alt text", name: "bookCoverAlt", widget: "string" }
+          - { label: "Book section — title", name: "bookTitle", widget: "string" }
+          - { label: "Book section — subtitle", name: "bookSubtitle", widget: "string" }
+          - { label: "Book section — description (HTML allowed)", name: "bookDescription", widget: "text", hint: "Inline italics use <em>...</em>. Em-dashes are written &mdash;." }
+          - { label: "Book section — primary CTA label", name: "bookPrimaryCtaLabel", widget: "string", default: "Read More" }
+          - { label: "Book section — primary CTA link", name: "bookPrimaryCtaHref", widget: "string", default: "/book" }
+          - label: "Book section — secondary buttons"
+            name: "bookSecondaryButtons"
+            widget: "list"
+            required: false
+            fields:
+              - { label: "Label", name: "label", widget: "string" }
+              - { label: "URL", name: "url", widget: "string" }
+
+          - { label: "Appearances — eyebrow", name: "appearancesEyebrow", widget: "string", default: "Recently On" }
+          - { label: "Appearances — heading", name: "appearancesHeading", widget: "string", default: "In conversation" }
+          - { label: "Appearances — 'see all' link label", name: "appearancesSeeAllLabel", widget: "string", default: "See all appearances →" }
+          - { label: "Appearances — 'see all' link href", name: "appearancesSeeAllHref", widget: "string", default: "/media" }
+
+          - label: "Three paths (audience cards at the bottom)"
+            name: "paths"
+            widget: "list"
+            fields:
+              - { label: "Number (I., II., III.)", name: "number", widget: "string" }
+              - { label: "Heading", name: "heading", widget: "string" }
+              - { label: "Body", name: "body", widget: "text" }
+              - { label: "Link label", name: "linkLabel", widget: "string" }
+              - { label: "Link href", name: "linkHref", widget: "string" }
+
+      - label: "About"
+        name: "about"
+        file: "src/content/pages/about.md"
+        fields:
+          - { label: "Page type (internal)", name: "page", widget: "hidden", default: "about" }
+          - { label: "Page title", name: "pageTitle", widget: "string" }
+          - { label: "Page description", name: "pageDescription", widget: "text", required: false }
+
+          - { label: "Section label (eyebrow)", name: "sectionLabel", widget: "string", default: "About" }
+          - { label: "Heading", name: "heading", widget: "string" }
+          - { label: "Lede paragraph", name: "lede", widget: "text" }
+          - label: "Intro paragraphs (after the lede, beside the headshot)"
+            name: "introParagraphs"
+            widget: "list"
+            field: { label: "Paragraph (HTML allowed)", name: "paragraph", widget: "text", hint: "Inline italics use <em>...</em>. Em-dashes are &mdash;, en-dashes are &ndash;, curly quotes are &lsquo; &rsquo; &ldquo; &rdquo;." }
+          - { label: "Headshot image path", name: "headshotImage", widget: "string", default: "/images/headshot-hero.jpg" }
+          - { label: "Headshot alt text", name: "headshotAlt", widget: "string", default: "Portrait of Leslie Baynes" }
+
+          - { label: "Origin section — heading", name: "originHeading", widget: "string" }
+          - label: "Origin section — paragraphs"
+            name: "originParagraphs"
+            widget: "list"
+            field: { label: "Paragraph (HTML allowed)", name: "paragraph", widget: "text" }
+
+          - { label: "Service section — heading", name: "serviceHeading", widget: "string" }
+          - label: "Service section — paragraphs"
+            name: "serviceParagraphs"
+            widget: "list"
+            field: { label: "Paragraph (HTML allowed)", name: "paragraph", widget: "text" }
+
+          - { label: "Teaching section — heading", name: "teachingHeading", widget: "string" }
+          - label: "Teaching section — paragraphs"
+            name: "teachingParagraphs"
+            widget: "list"
+            field: { label: "Paragraph (HTML allowed)", name: "paragraph", widget: "text" }
+
+          - { label: "CV call-to-action — heading", name: "cvHeading", widget: "string", default: "Full publication list and academic history" }
+          - { label: "CV call-to-action — description", name: "cvDescription", widget: "string", default: "Complete CV available as a downloadable PDF." }
+          - { label: "CV button label", name: "cvButtonLabel", widget: "string", default: "Download CV" }
+          - { label: "CV button href", name: "cvButtonHref", widget: "string", default: "/cv-leslie-baynes.pdf" }
+
+      - label: "Book"
+        name: "book"
+        file: "src/content/pages/book.md"
+        fields:
+          - { label: "Page type (internal)", name: "page", widget: "hidden", default: "book" }
+          - { label: "Page title", name: "pageTitle", widget: "string" }
+          - { label: "Page description", name: "pageDescription", widget: "text", required: false }
+
+          - { label: "Meta line (publisher · year · pages)", name: "meta", widget: "string" }
+          - { label: "Cover image", name: "coverImage", widget: "string", default: "/images/book-cover-large.jpg" }
+          - { label: "Cover alt text", name: "coverAlt", widget: "string" }
+          - { label: "Book title", name: "bookTitle", widget: "string" }
+          - { label: "Book subtitle", name: "bookSubtitle", widget: "string" }
+          - { label: "Hero — question line (HTML allowed)", name: "question", widget: "text" }
+          - { label: "Hero — description (HTML allowed)", name: "description", widget: "text", hint: "Inline italics use <em>...</em>." }
+          - label: "Buy links (purchase buttons)"
+            name: "buyLinks"
+            widget: "list"
+            fields:
+              - { label: "Label", name: "label", widget: "string" }
+              - { label: "URL", name: "url", widget: "string" }
+              - { label: "Primary button style?", name: "primary", widget: "boolean", default: false, required: false }
+
+          - { label: "Praise eyebrow", name: "praiseEyebrow", widget: "string", default: "Praise" }
+          - { label: "Praise heading", name: "praiseHeading", widget: "string", default: "What scholars are saying" }
+
+          - { label: "About-the-book eyebrow", name: "aboutBookEyebrow", widget: "string", default: "About the Book" }
+          - { label: "About-the-book heading", name: "aboutBookHeading", widget: "string" }
+          - label: "About-the-book paragraphs"
+            name: "aboutBookParagraphs"
+            widget: "list"
+            fields:
+              - { label: "Paragraph text (HTML allowed)", name: "text", widget: "text" }
+              - { label: "Render as accent pull-quote?", name: "accent", widget: "boolean", default: false, required: false, hint: "Check for the single italicized pull-quote line." }
+
+          - { label: "Contents eyebrow", name: "contentsEyebrow", widget: "string", default: "Table of Contents" }
+          - { label: "Contents heading (HTML allowed)", name: "contentsHeading", widget: "string" }
+          - label: "Contents — parts"
+            name: "contentsParts"
+            widget: "list"
+            fields:
+              - { label: "Label (e.g. 'Part One')", name: "label", widget: "string" }
+              - { label: "Subtitle (HTML allowed)", name: "subtitle", widget: "string" }
+              - label: "Chapters"
+                name: "chapters"
+                widget: "list"
+                field: { label: "Chapter title (HTML allowed)", name: "chapter", widget: "string" }
+
+          - { label: "Author eyebrow", name: "authorEyebrow", widget: "string", default: "About the Author" }
+          - { label: "Author name", name: "authorName", widget: "string", default: "Leslie Baynes" }
+          - { label: "Author image", name: "authorImage", widget: "string", default: "/images/headshot-medium.jpg" }
+          - { label: "Author image alt text", name: "authorImageAlt", widget: "string", default: "Leslie Baynes" }
+          - label: "Author paragraphs"
+            name: "authorParagraphs"
+            widget: "list"
+            field: { label: "Paragraph (HTML allowed)", name: "paragraph", widget: "text" }
+          - { label: "Author link label (HTML allowed)", name: "authorLinkLabel", widget: "string", default: "Read the full biography →" }
+          - { label: "Author link href", name: "authorLinkHref", widget: "string", default: "/about" }
+
+      - label: "Contact"
+        name: "contact"
+        file: "src/content/pages/contact.md"
+        fields:
+          - { label: "Page type (internal)", name: "page", widget: "hidden", default: "contact" }
+          - { label: "Page title", name: "pageTitle", widget: "string" }
+          - { label: "Page description", name: "pageDescription", widget: "text", required: false }
+
+          - { label: "Section label (eyebrow)", name: "sectionLabel", widget: "string", default: "Contact" }
+          - { label: "Heading", name: "heading", widget: "string" }
+          - { label: "Lede paragraph", name: "lede", widget: "text" }
+
+          - label: "Contact cards"
+            name: "contactCards"
+            widget: "list"
+            fields:
+              - { label: "Icon letter", name: "icon", widget: "string", hint: "A single letter (M, S, A)." }
+              - { label: "Heading (HTML allowed)", name: "heading", widget: "string" }
+              - { label: "Body", name: "body", widget: "text" }
+              - { label: "Email", name: "email", widget: "string" }
+              - { label: "Response time (HTML allowed)", name: "responseTime", widget: "string" }
+
+          - { label: "Affiliation heading", name: "affiliationHeading", widget: "string", default: "Institutional affiliation" }
+          - label: "Affiliation lines (one per line of the address block)"
+            name: "affiliationLines"
+            widget: "list"
+            field: { label: "Line", name: "line", widget: "string" }
+          - { label: "Institutional email", name: "affiliationEmail", widget: "string", required: false }
+
+  # ═══════════════════════════════════════════════════════════
+  # SITE-WIDE SETTINGS (single entry)
+  # ═══════════════════════════════════════════════════════════
+  - name: "settings"
+    label: "Site Settings"
+    description: "Site-wide values used across every page (meta tags, social image, social links)."
+    files:
+      - label: "Site"
+        name: "site"
+        file: "src/content/settings/site.json"
+        fields:
+          - { label: "Site name", name: "siteName", widget: "string" }
+          - { label: "Author name", name: "authorName", widget: "string" }
+          - { label: "Tagline", name: "tagline", widget: "string", required: false }
+          - { label: "Default page description (used when a page doesn't set its own)", name: "defaultDescription", widget: "text" }
+          - { label: "Open Graph / social share image", name: "ogImage", widget: "string", default: "/images/book-cover-large.jpg" }
+          - { label: "Default headshot image", name: "headshotImage", widget: "string", default: "/images/headshot-hero.jpg" }
+          - label: "Social links"
+            name: "socialLinks"
+            widget: "list"
+            required: false
+            fields:
+              - { label: "Platform", name: "platform", widget: "string", hint: "e.g. Twitter, Bluesky, LinkedIn" }
+              - { label: "URL", name: "url", widget: "string" }

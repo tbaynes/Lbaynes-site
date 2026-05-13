@@ -1,6 +1,12 @@
 ---
 import Base from '../layouts/Base.astro';
-import { getCollection } from 'astro:content';
+import { getCollection, getEntry } from 'astro:content';
+
+const page = await getEntry('pages', 'book');
+if (!page || page.data.page !== 'book') {
+  throw new Error('Missing book page content entry (src/content/pages/book.md)');
+}
+const data = page.data;
 
 const allEndorsements = await getCollection('endorsements');
 const sorted = allEndorsements.sort((a, b) => a.data.order - b.data.order);
@@ -12,8 +18,8 @@ const reviews = sorted.filter(e => e.data.tier === 'review');
 ---
 
 <Base
-  title="Between Interpretation and Imagination — Leslie Baynes"
-  description="Between Interpretation and Imagination: C. S. Lewis and the Bible (Eerdmans, 2025) — the first full-length study of how Lewis actually read Scripture, drawing on never-before-published marginalia from his personal library."
+  title={data.pageTitle}
+  description={data.pageDescription}
   activePage="book"
 >
 
@@ -21,34 +27,26 @@ const reviews = sorted.filter(e => e.data.tier === 'review');
   <section class="book-hero">
     <div class="book-cover-real">
       <img
-        src="/images/book-cover-large.jpg"
-        alt="Between Interpretation and Imagination: C. S. Lewis and the Bible"
+        src={data.coverImage}
+        alt={data.coverAlt}
         loading="eager"
         fetchpriority="high"
       />
     </div>
 
     <div class="book-hero-text">
-      <div class="meta">Eerdmans &middot; 2025 &middot; 350 pp.</div>
-      <h1>Between Interpretation &amp; Imagination</h1>
-      <p class="subtitle">C. S. Lewis and the Bible</p>
+      <div class="meta">{data.meta}</div>
+      <h1>{data.bookTitle}</h1>
+      <p class="subtitle">{data.bookSubtitle}</p>
 
-      <p class="question">
-        How did the twentieth century&rsquo;s most beloved Christian writer actually read Scripture?
-      </p>
+      <p class="question" set:html={data.question}></p>
 
-      <p class="desc">
-        Drawing on never-before-published marginalia from C. S. Lewis&rsquo;s personal library,
-        alongside his letters, essays, and fiction, <em>Between Interpretation and Imagination</em>
-        is the first full-length study of Lewis&rsquo;s engagement with the Bible &mdash; and the
-        first to treat him with the scholarly seriousness he both demanded and deserved.
-      </p>
+      <p class="desc" set:html={data.description}></p>
 
       <div class="purchase-buttons">
-        <a href="#" class="btn primary">Bookshop.org</a>
-        <a href="#" class="btn">Eerdmans</a>
-        <a href="#" class="btn">Amazon</a>
-        <a href="#" class="btn">Barnes &amp; Noble</a>
+        {data.buyLinks.map(b => (
+          <a href={b.url} class={b.primary ? "btn primary" : "btn"}>{b.label}</a>
+        ))}
       </div>
     </div>
   </section>
@@ -57,8 +55,8 @@ const reviews = sorted.filter(e => e.data.tier === 'review');
   <section class="praise-section">
     <div class="praise-inner">
       <div class="praise-header">
-        <div class="section-label">Praise</div>
-        <h2>What scholars are saying</h2>
+        <div class="section-label">{data.praiseEyebrow}</div>
+        <h2>{data.praiseHeading}</h2>
       </div>
 
       {leadQuote && (
@@ -106,77 +104,31 @@ const reviews = sorted.filter(e => e.data.tier === 'review');
 
   <!-- ABOUT THE BOOK -->
   <section class="about-book">
-    <div class="section-label">About the Book</div>
-    <h2>A literary genius reads a sacred book</h2>
+    <div class="section-label">{data.aboutBookEyebrow}</div>
+    <h2>{data.aboutBookHeading}</h2>
 
-    <p>
-      Lewis is the most widely read Christian writer of the last century. The Chronicles of Narnia
-      have sold more than a hundred million copies. <em>Mere Christianity</em> reshaped modern
-      apologetics. Generations have taken their first theological bearings from his prose.
-    </p>
-
-    <p class="accent-line">
-      And yet &mdash; until now &mdash; no one has written a book-length study of how he actually
-      read the Bible.
-    </p>
-
-    <p>
-      In <em>Between Interpretation and Imagination</em>, Leslie Baynes brings a New Testament
-      scholar&rsquo;s tools to the question. She reconstructs Lewis&rsquo;s scriptural formation
-      from his Belfast childhood through his Oxford years to the final Cambridge decade, identifies
-      the figures who shaped his interpretive instincts &mdash; Charles Gore, James Moffatt, and
-      others largely forgotten outside academic theology &mdash; and examines the marginalia Lewis
-      left in his own copies of commentaries and Bibles. Many of those notes appear here in print
-      for the first time.
-    </p>
-
-    <p>
-      The book is direct where Lewis was wrong and generous where he was brilliant. Baynes argues
-      that Lewis&rsquo;s nonfiction engagement with academic biblical scholarship &mdash; including
-      his famous essay <em>&ldquo;Modern Theology and Biblical Criticism&rdquo;</em> and the
-      <em>&ldquo;Liar, Lunatic, Lord&rdquo;</em> argument &mdash; is weaker than his admirers
-      believe. But she finds that Lewis&rsquo;s greatest gift as a reader of Scripture was never
-      exegetical. It was imaginative.
-    </p>
-
-    <p>
-      The Chronicles of Narnia, she shows, are saturated with biblical and classical allusion in
-      ways even devoted readers have missed: the talking animals rooted in rabbinic tradition, the
-      Calormene theology drawn from ancient sources, Aslan&rsquo;s death and return carrying more
-      than the obvious cross-shaped echo. It is, in the end, a book about how a literary genius
-      reads a sacred book &mdash; and about what the rest of us can learn from both his failures
-      and his triumphs.
-    </p>
+    {data.aboutBookParagraphs.map(p => (
+      <p class={p.accent ? "accent-line" : undefined} set:html={p.text}></p>
+    ))}
   </section>
 
   <!-- CONTENTS -->
   <section class="contents">
     <div class="contents-inner">
-      <div class="section-label">Table of Contents</div>
-      <h2>What&rsquo;s inside</h2>
+      <div class="section-label">{data.contentsEyebrow}</div>
+      <h2 set:html={data.contentsHeading}></h2>
 
-      <div class="contents-part">
-        <h3>Part One</h3>
-        <p class="subtitle">Lewis&rsquo;s Life with Scripture: A Brief Biography</p>
-        <ul>
-          <li>Earliest Engagements: 1898&ndash;1932</li>
-          <li>Reading about Scripture: The 1930s</li>
-          <li>Writing about Scripture: 1932&ndash;1949</li>
-          <li>Fruition: 1950&ndash;1963</li>
-        </ul>
-      </div>
-
-      <div class="contents-part">
-        <h3>Part Two</h3>
-        <p class="subtitle">Case Studies and Controversies: Lewis the &ldquo;Bonny Fighter&rdquo;</p>
-        <ul>
-          <li>&ldquo;We Are Not Fundamentalists&rdquo;: Lewis among the Evangelicals</li>
-          <li>Myth as Fact or Fiction? Lewis vs. Bultmann</li>
-          <li>The &ldquo;Liar, Lunatic, Lord&rdquo; Argument</li>
-          <li>Lewis and the Gospel of John</li>
-          <li>Scripture in the Chronicles of Narnia</li>
-        </ul>
-      </div>
+      {data.contentsParts.map(part => (
+        <div class="contents-part">
+          <h3>{part.label}</h3>
+          <p class="subtitle" set:html={part.subtitle}></p>
+          <ul>
+            {part.chapters.map(ch => (
+              <li set:html={ch}></li>
+            ))}
+          </ul>
+        </div>
+      ))}
     </div>
   </section>
 
@@ -184,26 +136,18 @@ const reviews = sorted.filter(e => e.data.tier === 'review');
   <section class="author-block">
     <div class="author-image">
       <img
-        src="/images/headshot-medium.jpg"
-        alt="Leslie Baynes"
+        src={data.authorImage}
+        alt={data.authorImageAlt}
         loading="lazy"
       />
     </div>
     <div class="author-text">
-      <div class="section-label">About the Author</div>
-      <h2>Leslie Baynes</h2>
-      <p>
-        Leslie Baynes is Professor of Religious Studies at Missouri State University and a
-        translator of the New American Bible Revised Edition. She has served as Scholar-in-Residence
-        at The Kilns &mdash; C. S. Lewis&rsquo;s home outside Oxford &mdash; and as a fellow of the
-        Inklings Project at the University of Notre Dame&rsquo;s McGrath Institute for Church Life.
-      </p>
-      <p>
-        She is the author of <em>The Heavenly Book Motif in Judeo-Christian Apocalypses 200
-        BCE&ndash;200 CE</em> (Brill, 2012) and writes on apocalyptic literature, 1 Enoch, the Book
-        of Revelation, and the reception history of biblical texts.
-      </p>
-      <a href="/about" class="link">Read the full biography &rarr;</a>
+      <div class="section-label">{data.authorEyebrow}</div>
+      <h2>{data.authorName}</h2>
+      {data.authorParagraphs.map(para => (
+        <p set:html={para}></p>
+      ))}
+      <a href={data.authorLinkHref} class="link" set:html={data.authorLinkLabel}></a>
     </div>
   </section>
 
