@@ -6,4 +6,5 @@ url: https://thebiblicalmind.org/podcast/c-s-lewis-under-the-microscope-biblical
 topic: "C.S. Lewis Under the Microscope: Biblical Accuracy, Errors, and Influence"
 category: general
 upcoming: false
+featured: true
 ---
